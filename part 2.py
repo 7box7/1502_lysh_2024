@@ -45,3 +45,27 @@ class Bonus(pygame.sprite.Sprite):
 def distance(coord1, coord2):
     return abs(coord1 - coord2)
 
+self.snake.turn.append([self.snake.rect.x, self.snake.rect.y, self.snake.x_speed, self.snake.y_speed])
+
+
+check = pygame.sprite.spritecollideany(self, self.game.apples)
+if check:
+if check.type == 1 or check.type == 2:
+    for i in range(self.game.apple.cost):
+        body = Game.SnakeBody((self.last.rect.x - 20 * get_sign(self.last.x_speed)
+                               - 5 * get_sign(self.last.x_speed) * (i > 0),
+                               self.last.rect.y - 20 * get_sign(self.last.y_speed)
+                               - 5 * get_sign(self.last.y_speed) * (i > 0)),
+                              (self.last.x_speed, self.last.y_speed), self.game,
+                              self.game.count + i + 1)
+
+        self.game.all_bodyies.append(body)
+        if self.pred is None:
+            self.game.bodyes.remove(body)
+
+        self.last.pred = body
+        self.last = body
+
+    check.kill()
+    self.game.apple = Game.Apple(get_random_pos(self.game.all_board.copy(), self.game.all_bodyies), self.game)
+
