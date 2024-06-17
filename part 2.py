@@ -42,4 +42,6 @@ class Bonus(pygame.sprite.Sprite):
         self.rect = pygame.Rect(pos, (16, 16))
         self.game = game
 
+def distance(coord1, coord2):
+    return abs(coord1 - coord2)
 
