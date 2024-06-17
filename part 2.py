@@ -35,7 +35,11 @@ class SnakeBody(pygame.sprite.Sprite):
                     self.turn.pop(0)
 
 
-def get_random_pos():
-    pos = random.randint(50, 750), random.randint(50, 750)
-    return pos
+class Bonus(pygame.sprite.Sprite):
+    def __init__(self, pos, game):
+        super().__init__(game.sprites)
+        self.add(game.apples)
+        self.rect = pygame.Rect(pos, (16, 16))
+        self.game = game
+
 
